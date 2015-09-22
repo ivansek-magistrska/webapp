@@ -1,0 +1,5 @@
+.idea/
+deployment_scripts.log
+*.pyc
+backend/results/*
+static/

@@ -1,0 +1,232 @@
+<h1 class="text-center">Configuration summary</h1>
+<hr>
+<form name="form" ng-submit="nextStep('/step7', form)">
+<div class="form-horizontal">
+    <h3>General <a href="#/step1" title="Change"><span class="glyphicon glyphicon-cog"></span></a></h3>
+    <hr/>
+    <div class="form-group">
+        <label class="col-sm-6">
+            Provider:
+        </label>
+        <div class="col-sm-6">
+            {% verbatim %}
+                {{ formData.provider }}
+            {% endverbatim %}
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-6">
+            Database type:
+        </label>
+        <div class="col-sm-6">
+            {% verbatim %}
+                {{ formData.db_provider }}
+            {% endverbatim %}
+        </div>
+    </div>
+    <h3>Frontend <a href="#/step3" title="Change"><span class="glyphicon glyphicon-cog"></span></a></h3>
+    <hr/>
+    <div class="form-group">
+        <label class="col-md-6">
+            Is autoscalable
+        </label>
+        <div class="col-sm-6">
+            {% verbatim %}
+                <span ng-class="formData.fr.autoscaling == 'no'? 'glyphicon glyphicon-remove' : 'glyphicon glyphicon-ok'"></span>
+            {% endverbatim %}
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-6">
+            Cooldown:
+        </label>
+        <div class="col-sm-6">
+            {% verbatim %}
+                {{ formData.fr.cooldown }}
+            {% endverbatim %}
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-6">
+            AWS access key:
+        </label>
+        <div class="col-sm-6">
+            {% verbatim %}
+                {{ formData.fr.access_key }}
+            {% endverbatim %}
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-6">
+            AWS secret key:
+        </label>
+        <div class="col-sm-6">
+            {% verbatim %}
+                {{ formData.fr.secret_key }}
+            {% endverbatim %}
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-6">
+            Number of frontend instances:
+        </label>
+        <div class="col-sm-6">
+            {% verbatim %}
+                {{ formData.fr.num_instances }}
+            {% endverbatim %}
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-6">
+            Frontend instance type:
+        </label>
+        <div class="col-sm-6">
+            {% verbatim %}
+                {{ formData.fr.instance_type }}
+            {% endverbatim %}
+        </div>
+    </div>
+    <h3>Database <a href="#/step4" title="Change"><span class="glyphicon glyphicon-cog"></span></a></h3>
+    <hr />
+    <div class="form-group">
+        <label class="col-sm-6">
+           Master identifier:
+        </label>
+        <div class="col-sm-6">
+            {% verbatim %}
+                {{ formData.db.master_identifier }}
+            {% endverbatim %}
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-6">
+           Slave identifier:
+        </label>
+        <div class="col-sm-6">
+            {% verbatim %}
+                {{ formData.db.replica_identifier }}
+            {% endverbatim %}
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-6">
+            Number of replicas:
+        </label>
+        <div class="col-sm-6">
+            {% verbatim %}
+                {{ formData.db.num_replicas }}
+            {% endverbatim %}
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-6">
+            Database instance type:
+        </label>
+        <div class="col-sm-6">
+            {% verbatim %}
+                {{ formData.db.instance_type }}
+            {% endverbatim %}
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-6">
+            Number of database instances:
+        </label>
+        <div class="col-sm-6">
+            {% verbatim %}
+                {{ formData.db.num_instances }}
+            {% endverbatim %}
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-6">
+            Connection pool size:
+        </label>
+        <div class="col-sm-6">
+            {% verbatim %}
+                {{ formData.db.connection_pool_size }}
+            {% endverbatim %}
+        </div>
+    </div>
+    <h3>Distributed JMeter <a href="#/step5" title="Change"><span class="glyphicon glyphicon-cog"></span></a></h3>
+    <hr />
+    <div class="form-group">
+        <label class="col-sm-6">
+            AWS access key:
+        </label>
+        <div class="col-sm-6">
+            {% verbatim %}
+                {{ formData.jmeter.aws_access_key }}
+            {% endverbatim %}
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-6">
+            AWS secret key:
+        </label>
+        <div class="col-sm-6">
+            {% verbatim %}
+                {{ formData.jmeter.aws_secret_key }}
+            {% endverbatim %}
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-6">
+            AMI id:
+        </label>
+        <div class="col-sm-6">
+            {% verbatim %}
+                {{ formData.jmeter.ami_id }}
+            {% endverbatim %}
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-6">
+            Instance type:
+        </label>
+        <div class="col-sm-6">
+            {% verbatim %}
+                {{ formData.jmeter.instance_type }}
+            {% endverbatim %}
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-6">
+            Scenario duration in minutes
+        </label>
+        <div class="col-sm-6">
+            {% verbatim %}
+                {{ formData.jmeter.scenario_duration }}
+            {% endverbatim %}
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-6">
+           Number of VUs:
+        </label>
+        <div class="col-sm-6">
+            {% verbatim %}
+                {{ formData.jmeter.num_threads }}
+            {% endverbatim %}
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-6">
+            JMeter distribution URL
+        </label>
+        <div class="col-sm-6">
+            {% verbatim %}
+                {{ formData.jmeter.url }}
+            {% endverbatim %}
+        </div>
+    </div>
+    <hr>
+    <div class="text-center">
+        <button name="prev" type="button" ng-click="prevStep('/step5')" class="btn btn-primary">Prev</button>
+        <button name="next" type="submit" class="btn btn-primary">Next</button>
+    </div>
+    <pre>
+        {% verbatim %}{{ formData | json }}{% endverbatim %}
+    </pre>
+</div>
+</form>

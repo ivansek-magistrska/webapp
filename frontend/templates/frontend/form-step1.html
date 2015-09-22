@@ -1,0 +1,22 @@
+{% load staticfiles %}
+<div class="form-group text-center">
+    <h2>Choose provider</h2>
+    <hr>
+    <p>
+        <div class="provider" ng-click="provider('aws')">
+            <img  src="{% static "frontend/images/amazon-web-services.jpg" %}" />
+        </div>
+        <div class="provider" ng-click="provider('openstack')" >
+            <img width="200" src="{% static "frontend/images/gcp.png" %}" />
+        </div>
+    </p>
+    <p>
+        <input type="checkbox" ng-model="formData.skip_deployment" /> Skip deployment?
+    </p>
+    <p>
+        <input type="checkbox" ng-model="formData.skip_test" /> Skip JMeter test?
+    </p>
+    <hr>
+</div>
+
+</div>

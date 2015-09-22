@@ -1,0 +1,85 @@
+<h2 class="text-center">Configure distributed JMeter</h2>
+<hr>
+<form name="form" enctype="multipart/form-data" novalidate ng-submit="nextStep('/step6', form)">
+    {% csrf_token %}
+    <div class="form-group" ng-class="{'has-error' : submitted && !form.num_threads.length}">
+        <label>
+            Number of threads:
+        </label>
+        <input type="number" name="num_threads" min="0" max="20000" ng-model="formData.jmeter.num_threads" class="form-control">
+        <span class="help-block" ng-show="submitted && !form.num_threads.length">Required</span>
+    </div>
+    <div class="form-group" ng-class="{'has-error' : submitted && !form.jmeter_aws_access_key.length}">
+        <label>
+            JMeter AWS access key
+        </label>
+        <input type="text" list="aws_access_key_list" name="jmeter_aws_access_key" ng-model="formData.jmeter.aws_access_key" class="form-control">
+        <span class="help-block" ng-show="submitted && !form.jmeter_aws_access_key.length">Required</span>
+        <datalist id="aws_access_key_list">
+            <option value="{% verbatim %}{{ formData.fr.access_key }}{% endverbatim %}"></option>
+        </datalist>
+    </div>
+    <div class="form-group" ng-class="{'has-error' : submitted && !form.jmeter_aws_secret_key.length}">
+        <label>
+            JMeter AWS secret key
+        </label>
+        <input type="text" list="aws_secret_key_list" name="jmeter_aws_secret_key" ng-model="formData.jmeter.aws_secret_key" class="form-control">
+        <span class="help-block" ng-show="submitted && !form.jmeter_aws_secret_key.length">Required</span>
+        <datalist id="aws_secret_key_list">
+            <option value="{% verbatim %}{{ formData.fr.secret_key }}{% endverbatim %}"></option>
+        </datalist>
+    </div>
+    <div class="form-group" ng-class="{'has-error' : submitted && form.jmeter_instance_type.$invalid}">
+        <label>
+            JMeter instance type
+        </label>
+        <select name="jmeter_instance_type" required ng-model="formData.jmeter.instance_type"
+                    ng-init="formData.jmeter.instance_type = ec2_instance_types[1]"
+                    ng-options="value.name for value in ec2_instance_types track by value.id" class="form-control">
+        </select>
+        <span class="help-block" ng-show="submitted && form.jmeter_instance_type.$invalid">Required</span>
+    </div>
+    <div class="form-group" ng-class="{'has-error' : submitted && form.jmeter_key_name.$invalid}">
+        <label>
+            JMeter key name
+        </label>
+        <input name="key_name" ng-model="formData.jmeter.key_name" class="form-control">
+        <span class="help-block" ng-show="submitted && form.jmeter_key_name.$invalid">Required</span>
+    </div>
+    <div class="form-group" ng-class="{'has-error' : submitted && !form.scenario_duration.length}">
+        <label>
+           Scenario duration in minutes
+        </label>
+        <input type="number" name="scenario_duration" ng-model="formData.jmeter.scenario_duration" class="form-control">
+        <span class="help-block" ng-show="submitted && !form.scenario_duration.length">Required</span>
+    </div>
+    <div class="form-group" ng-class="{'has-error' : submitted && !form.ami_id.length}">
+        <label>
+            AMI id
+        </label>
+        <input type="text" name="ami_id" ng-model="formData.jmeter.ami_id" class="form-control">
+        <span class="help-block" ng-show="submitted && !form.ami_id.length">Required</span>
+    </div>
+    <div class="form-group" ng-class="{'has-error' : submitted && !form.jmeter_url.length}">
+        <label>
+            URL to JMeter distribution
+        </label>
+        <input type="text" name="url" ng-model="formData.jmeter.url" class="form-control">
+        <span class="help-block" ng-show="submitted && !form.url.length">Required</span>
+    </div>
+    <div class="form-group">
+        <label>
+            Upload scenario
+        </label>
+        <div  class="dropzone" style="">
+            <div ng-class="{'ng-hide' : uploaded}" class="dz-message">
+                Click or drop scenario here
+            </div>
+        </div>
+    </div>
+    <hr>
+    <div class="text-center">
+        <button name="prev" type="button" ng-click="prevStep('/step4')" class="btn btn-primary">Prev</button>
+        <button name="next" type="submit" class="btn btn-primary">Next</button>
+    </div>
+</form>

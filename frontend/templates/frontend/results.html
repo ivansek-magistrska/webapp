@@ -1,0 +1,73 @@
+{% load staticfiles swampdragon_tags %}
+<!DOCTYPE html>
+<html ng-app="results">
+<head>
+    <title></title>
+    <link href="{% static "frontend/css/bootstrap/bootstrap.min.css" %}" rel="stylesheet"/>
+    <link href="{% static "frontend/css/main.css" %}" rel="stylesheet"/>
+    <link href='http://fonts.googleapis.com/css?family=VT323' rel='stylesheet' type='text/css'>
+    <!-- JS -->
+    <!-- load angular, nganimate, and ui-router -->
+
+    <style type="text/css">
+        .output{
+            background-color: #141414;
+            font-family: monospace;
+            color: #ffff00;
+            padding: 10px;
+            width: 600px;
+            margin: auto;
+            height: 500px;
+            overflow-y: scroll;
+        }
+    </style>
+</head>
+<body>
+
+{% verbatim %}
+<div ng-controller="logCtrl" class="output">
+    <div>
+        <p ng-repeat="foo in foos track by $index">{{ foo.message }}</p>
+    </div>
+    <div>
+        <input type="button" ng-if="foo.fin"
+    </div>
+</div>
+{% endverbatim %}
+{% swampdragon_settings %}
+    <script type="text/javascript" src="{% static "frontend/js/angular/angular.min.js" %}"></script>
+    <script type="text/javascript" src="{% static "frontend/js/angular/angular-file-upload.min.js" %}"></script>
+    <script type="text/javascript" src="{% static "swampdragon/js/vendor/sockjs-0.3.4.min.js" %}"></script>
+    <script type="text/javascript" src="{% static "swampdragon/js/dist/swampdragon.js" %}"></script>
+    <script type="text/javascript" src="{% static "swampdragon/js/dist/datamapper.js" %}"></script>
+    <script type="text/javascript" src="{% static "swampdragon/js/angular/services.js"%}"></script>
+    <script type="text/javascript">
+        var app = angular.module('results', ['SwampDragonServices'])
+
+        app.controller('logCtrl',['$scope', '$dragon', function ($scope, $dragon) {
+            $scope.channel = 'log_{{ object.id }}'
+            $scope.foos = [];
+
+            $dragon.onReady(function() {
+                $dragon.subscribe('log-route', $scope.channel, null).then(function(response) {
+                    // this assume the foo-router is a ModelRouter
+                    // or a ModelPublisherRouter
+                    $scope.dataMapper = new DataMapper(response.data);
+                });
+
+                $dragon.getList('log-route', {'id' : {{ object.id }} }).then(function(response){
+                    $scope.foos = response.data
+                })
+            });
+
+            $dragon.onChannelMessage(function(channels, message) {
+                if (indexOf.call(channels, $scope.channel) > -1) {
+                    $scope.$apply(function() {
+                        $scope.dataMapper.mapData($scope.foos, message);
+                    });
+                }
+            });
+        }])
+    </script>
+</body>
+</html>
